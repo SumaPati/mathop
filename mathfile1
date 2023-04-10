@@ -1,0 +1,21 @@
+node
+{
+    stage 'Clean Workspace'
+    cleanWs()
+   
+   
+    stage('build MathOP')
+    checkout([$class: 'GitSCM', branches: [[name: '*/main']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '2756807e-c602-4926-b735-95f47357a8be', url: 'git@github.com:12kavitha/Test_Pipeline.git']]])
+     
+     stage('build MathOP')
+    dir('MathOP'){
+        script{
+            //bat '"C:/Program Files (x86)/Nuget/nuget.exe"  restore  LogicalOpearation.sln'
+            bat "\"${tool 'MS_BUILD'}\" MathOP.sln"
+        }
+           
+    }
+    dir('..'){
+       
+    }
+}
